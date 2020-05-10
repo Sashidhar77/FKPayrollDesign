@@ -78,6 +78,52 @@ class DayWager extends Employee {
 	}
 }
 
+class MonthWager extends Employee { 
+	private int datePaidTill;
+	private double wagePerMonth;
+
+	MonthWager(int eId, double rate){
+		super(eId);
+		datePaidTill = super.getJoinDate();
+		wagePerMonth = rate;
+	}
+	public void addMoney(int x) {
+
+	}
+	public void payMoney(){
+		if(days % 30 == 0){
+			double toBeAdded = 0.0;
+			toBeAdded = wagePerMonth * ((days - datePaidTill)/30.0);
+			super.addMoney(toBeAdded);
+			datePaidTill = days;
+			System.out.println(empId + " " + (super.getSalary() - super.getTotalUnionFare()) + " " + modeOfPayment);
+			super.setSalaryToZero();
+		}
+	}
+}
+
+class ComWager extends Employee {
+	private double saleValue;
+	private double commissionPercentange;
+
+	ComWager(int eId, double saleValue){
+		super(eId);
+		saleValue = 0;
+	}
+	public void addMoney(int sale){
+		double tobeAdded = (commissionPercentange * sale)/100.0;
+		super.addMoney(tobeAdded);
+		saleValue = 0;
+	}
+	public void payMoney(){
+		if(days % 14 == 0){
+			System.out.println(empId + " " + (super.getSalary() - super.getTotalUnionFare()) + " " + modeOfPayment);
+			super.setSalaryToZero();
+		}
+	}
+
+}
+
 public class project {
 	public static void main(String[] args) {
 		
