@@ -54,7 +54,29 @@ class Employee  implements Basic {
 	
 }
 
+class DayWager extends Employee {
+	private double wagePerDay;
 
+	DayWager(int eId, double rate){
+		super(eId);
+		wagePerDay = rate;
+	}
+	public void addMoney(double numOfHours) { 
+		double toBeAdded = 0.0;
+		toBeAdded = wagePerDay * numOfHours;
+		if(numOfHours > 8){ 
+			toBeAdded += wagePerDay * numOfHours * (0.5);
+		}
+
+		super.addMoney(toBeAdded);
+	}
+	public void payMoney(){
+		if(days % 7 == 0){
+			System.out.println(empId + " " + (super.getSalary()) + " " + modeOfPayment);
+			super.setSalaryToZero();
+		}
+	}
+}
 
 public class project {
 	public static void main(String[] args) {
