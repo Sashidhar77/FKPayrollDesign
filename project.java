@@ -150,6 +150,49 @@ class ComWager extends Employee {
 
 }
 
+class Payroll extends Days{
+	private HashMap<Integer, Employee> workers;
+
+	Payroll(){
+		workers = new HashMap<Integer, Employee>();
+	}
+	public void addEmployee(int empType, int eId, double rate){
+	 	if(empType == 1){
+	 		DayWager newEmp = new DayWager(eId, rate);
+	 		workers.put(eId, newEmp);
+	 	}
+	 	else if(empType == 2){
+	 		MonthWager newEmp = new MonthWager(eId, rate);
+	 		workers.put(eId, newEmp);
+	 	}
+	 	else{
+	 		ComWager newEmp = new ComWager(eId, rate);
+	 		workers.put(eId, newEmp);
+	 	}
+	 }
+	 public void removeEmployee(int eId){
+	 	workers.remove(eId);
+	 }
+	 public void postTimeCard(int eId, double hrs){
+	 	workers.get(eId).addMoney(hrs);
+	 }
+	 public void postSalesReceipt(int eId, double sale){
+	 	workers.get(eId).addMoney(sale);
+	 }
+	 public void runPayroll(){
+	 	for(Integer currKey : workers.keySet()){
+	 		workers.get(currKey).payMoney();
+	 	}
+	 }
+	 public void joinUnion(int eId, int uId, int dues, int fee){
+	 	workers.get(eId).joinUnion(uId, dues, fee);
+	 }
+	 public void addSpecialUnionFare(int uId, int fee){
+		 for(Integer currKey : workers.keySet()){
+		 		workers.get(currKey).addSpecialUnionFare(uId, fee);
+		 }
+	 }
+}
 public class project {
 	public static void main(String[] args) {
 		
