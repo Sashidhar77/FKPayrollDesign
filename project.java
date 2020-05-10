@@ -193,9 +193,53 @@ class Payroll extends Days{
 		 }
 	 }
 }
+
 public class project {
 	public static void main(String[] args) {
-		
-		
+		Payroll software = new Payroll();
+		Scanner obj = new Scanner(System.in);
+		int numOfDays = obj.nextInt();
+		for(int count = 0; count < numOfDays; count++){
+			String op = obj.nextLine();
+			if(op == "add"){
+				int type, id;
+				double wage;
+				type = obj.nextInt();
+				id = obj.nextInt();
+				wage = obj.nextDouble();
+				software.addEmployee(type, id, wage);
+			}
+			else if(op == "delete"){
+				int id;
+				id = obj.nextInt();
+				software.removeEmployee(id);
+			}
+			else if(op == "timecard"){
+				int id = obj.nextInt();
+				double hrs = obj.nextDouble();
+				software.postTimeCard(id, hrs);
+			}
+			else if(op == "salesreceipt"){
+				int id = obj.nextInt();
+				double amount = obj.nextDouble();
+				software.postSalesReceipt(id, amount);
+			}
+			else if(op == "joinunion"){
+				int eId = obj.nextInt();
+				int uId = obj.nextInt();
+				int dues = obj.nextInt();
+				int fee = obj.nextInt();
+				software.joinUnion(eId, uId, dues, fee);
+			}
+			else if(op == "addspecialunionfare"){
+				int uId = obj.nextInt();
+				int fee = obj.nextInt();
+				software.addSpecialUnionFare(uId, fee);
+			}
+
+			software.runPayroll();
+			Days.updateDays();
+
+		}
 	}
 }
